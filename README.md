@@ -3,5 +3,5 @@
 Decagon Week 6 Task (Node) - Solution
 
 ```
-Express and passengers
+Express and Passengers
 ```
