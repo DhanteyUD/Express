@@ -29,8 +29,7 @@ describe('Get Data in Database', () => {
       await supertest(app)
         .get('/api/')
         .set('Accept', 'application/json')
-        .expect(404)
-        .expect('Content-Type', /json/);
+        .expect(404);
     }
   });
 });
@@ -62,19 +61,16 @@ describe('Get Single Data', () => {
 
 // POST
 describe('Post Data', () => {
-  it('Should create new data', async () => {
+  it('Should create new data if validation is correct', async () => {
     const Data = {
-      id: uuid(),
-      organization: '',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      products: [],
-      marketValue: '',
-      address: '',
-      ceo: '',
-      country: '',
-      noOfEmployees: 1,
-      employees: [],
+      organization: 'node ninja',
+      products: ['developers', 'pizza'],
+      marketValue: '90%',
+      address: 'sangotedo',
+      ceo: 'cn',
+      country: 'Taiwan',
+      noOfEmployees: 2,
+      employees: ['james bond', 'jackie chan'],
     };
     await supertest(app)
       .post('/api/')
@@ -82,6 +78,13 @@ describe('Post Data', () => {
       .set('Accept', 'application/json')
       .expect(201)
       .expect('Content-Type', /json/);
+  });
+
+  it('Should return 403 for wrong validation', async () => {
+    await supertest(app)
+      .post('/api/')
+      .set('Accept', 'application/json')
+      .expect(403);
   });
 });
 
@@ -127,7 +130,7 @@ describe('Update Data', () => {
 // Delete
 describe('Delete Data', () => {
   const id: number | string = uuid();
-  it('should delete data is id exist', async () => {
+  it('should delete data if id exist', async () => {
     if (IDs.includes(id)) {
       await supertest(app)
         .delete(`/api/${id}`)

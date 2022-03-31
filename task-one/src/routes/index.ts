@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import {
   getAll,
   getById,
@@ -6,19 +6,16 @@ import {
   updateData,
   deleteData,
 } from '../controller/controller';
+import { indexController } from '../controller/index';
+import { postValidator } from '../validator/postValidator';
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send(`
-    <h1> Clinton Otse Express API </h1>
-    <p> Use '/api' to navigate database </p>
-  `);
-});
+router.get('/', indexController);
 
 router.get('/api', getAll);
 router.get('/api/:id', getById);
-router.post('/api', createData);
+router.post('/api', postValidator, createData);
 router.put('/api/:id', updateData);
 router.delete('/api/:id', deleteData);
 
