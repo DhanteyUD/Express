@@ -3,16 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 
 const schema = Joi.object({
   organization: Joi.string().required(),
-  products: Joi.array().items(Joi.string()).required(),
-  marketValue: Joi.string().required(),
+  products: Joi.array().items(Joi.string()),
+  marketValue: Joi.string(),
   address: Joi.string().required(),
-  ceo: Joi.string().required(),
+  ceo: Joi.string(),
   country: Joi.string().required(),
-  noOfEmployees: Joi.custom((val) => {
-    if (typeof val === 'number') return val;
-    throw new Error('must be a number');
-  }),
-  employees: Joi.array().items(Joi.string()).required(),
+  employees: Joi.array().items(Joi.string()),
 });
 
 export const postValidator = (

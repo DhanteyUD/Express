@@ -46,7 +46,6 @@ export async function createData(req: Request, res: Response) {
     address,
     ceo,
     country,
-    noOfEmployees,
     employees,
   } = req.body;
 
@@ -59,7 +58,7 @@ export async function createData(req: Request, res: Response) {
     address,
     ceo,
     country,
-    noOfEmployees,
+    noOfEmployees: employees ? employees.length : 0,
     employees,
   };
   const newData: Data = await create(user);
@@ -79,7 +78,6 @@ export async function updateData(req: Request, res: Response) {
       address,
       ceo,
       country,
-      noOfEmployees,
       employees,
     } = req.body;
 
@@ -92,7 +90,7 @@ export async function updateData(req: Request, res: Response) {
       address: address || data.address,
       ceo: ceo || data.ceo,
       country: country || data.country,
-      noOfEmployees: noOfEmployees || data.noOfEmployees,
+      noOfEmployees: employees ? employees.length : 0,
       employees: employees || data.employees,
     };
     const updatedData: Data | undefined = await update(id, user);
