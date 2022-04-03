@@ -8,6 +8,7 @@ const schema = Joi.object({
   address: Joi.string().required(),
   ceo: Joi.string(),
   country: Joi.string().required(),
+  noOfEmployees: Joi.number(),
   employees: Joi.array().items(Joi.string()),
 });
 

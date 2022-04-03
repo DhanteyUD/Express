@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node ./src/app.ts",
-    "dev": "nodemon ./bin/www",
+    "dev": " yarn tsc && nodemon ./bin/www",
     "test": "jest"
   },
   "dependencies": {
